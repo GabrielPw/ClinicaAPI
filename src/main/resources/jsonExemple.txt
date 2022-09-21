@@ -1,0 +1,29 @@
+    {
+		"id": 1,
+		"nome": "Gabriel",
+		"email": "exemple@gmail.com",
+		"senha": "1234",
+		"telefone": "119123456",
+		"dt_admissao": "2022-09-21",
+		"dtNascimento": "1990-09-01"
+	},
+	{
+		"id": 2,
+		"nome": "Pegorari",
+		"email": "exemple@gmail.com",
+		"senha": "123456",
+		"telefone": "119432456",
+		"dt_admissao": "2022-09-21",
+		"dtNascimento": "2000-09-01"
+	}
+
+
+
+	Rotas:
+
+	http://localhost:8080/cliente/getAll                    [Get]
+	http://localhost:8080/cliente/getById/4                 [Get]
+	http://localhost:8080/cliente/cadastrar                 [Post]
+	http://localhost:8080/cliente/6                         [Put]
+	http://localhost:8080/cliente/6                         [Delete]
+	http://localhost:8080/cliente/atualizarTelefone/1       [Put]
