@@ -22,15 +22,12 @@ public class Cliente {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "senha")
-    private String senha;
-
     @Column(name = "telefone")
     private String telefone;
 
-    @Column(name = "dt_admissao")
-    private LocalDate dt_admissao;
-
     @Column(name = "dt_nascimento")
     private LocalDate dtNascimento;
+
+    @OneToOne
+    private Usuario usuario;
 }

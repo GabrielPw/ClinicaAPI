@@ -1,4 +1,5 @@
 package com.api.clinicaTcc.model;
+import com.api.clinicaTcc.enums.FuncionarioCargoEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,7 @@ public class Funcionario {
     private LocalDate dt_admissao;
 
     @Column(name = "cargo")
-    private String cargo;
+    @Enumerated(EnumType.STRING)
+    private FuncionarioCargoEnum cargo;
 
 }
