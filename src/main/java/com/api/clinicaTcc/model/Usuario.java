@@ -22,4 +22,5 @@ public class Usuario {
     @JsonIgnore
     @OneToOne(mappedBy = "usuario")
     Cliente cliente;
+
 }
