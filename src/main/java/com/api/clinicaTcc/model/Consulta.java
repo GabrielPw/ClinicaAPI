@@ -27,8 +27,8 @@ public class Consulta {
     @ManyToOne
     private Clinica clinica;
 
-    @OneToMany
-    private List<Servico> servico;
+    @ManyToOne
+    private Servico servico;
 
     @ManyToOne
     @JoinColumn(name = "usuario_cpf")
