@@ -32,14 +32,18 @@ public class UsuarioService {
     }
     public Usuario novoUsuario(Usuario usuario){
 
-        usuarioRepository.save(usuario);
+        String cpf = usuario.getCpf();
 
-        Cliente cliente = new Cliente();
-        cliente.setUsuario(usuario);    // Associando um cliente para o novo usuario;
+        Optional<Usuario> existe = usuarioRepository.findById(cpf);
 
+        if (existe.isPresent()){
+            throw new IllegalArgumentException("O CPF inserido já está cadastrado.");
+        } else {
 
-        clienteController.cadastrar(cliente);
-        return usuario;
+            usuarioRepository.save(usuario);
+            return usuario;
+        }
     }
+
 
 }

@@ -4,6 +4,7 @@ import com.api.clinicaTcc.model.Cliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 
@@ -14,6 +15,9 @@ public class Usuario {
 
     @Id
     @Column(name = "cpf", columnDefinition = "char(11)")
+
+
+    @CPF(message = "CPF inserido é inválido")
     private String cpf;
 
     @Column(name = "senha")

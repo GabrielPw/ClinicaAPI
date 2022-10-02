@@ -19,17 +19,8 @@ public class Funcionario {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "senha")
-    private String senha;
-
     @Column(name = "telefone")
     private String telefone;
-
-    @Column(name = "dt_admissao")
-    private LocalDate dt_admissao;
 
     @Column(name = "cargo")
     @Enumerated(EnumType.STRING)

@@ -4,10 +4,17 @@ import com.api.clinicaTcc.model.Cliente;
 import com.api.clinicaTcc.model.Usuario;
 import com.api.clinicaTcc.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -39,11 +46,25 @@ public class UsuarioController {
     }
 
     @PostMapping("/newUsuario")
-    public ResponseEntity<Usuario> newUsuario(@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> newUsuario(@Valid @RequestBody Usuario usuario){
 
 
         return ResponseEntity.ok(usuarioService.novoUsuario(usuario));
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExcception(MethodArgumentNotValidException ex){
+
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+
+        return errors;
+    }
 
 }

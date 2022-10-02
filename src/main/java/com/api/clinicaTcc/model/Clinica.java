@@ -34,6 +34,6 @@ public class Clinica {
     @Column(name = "rua")
     private String rua;
 
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private List<Consulta> consulta;
 }
