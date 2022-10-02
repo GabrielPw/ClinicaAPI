@@ -3,11 +3,13 @@ package com.api.clinicaTcc.controller;
 import com.api.clinicaTcc.model.Cliente;
 import com.api.clinicaTcc.model.Usuario;
 import com.api.clinicaTcc.service.UsuarioService;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@Validated
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
@@ -31,7 +34,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/getByCpf/{cpf}")
-    public ResponseEntity<Usuario> getByCpf(@PathVariable String cpf){
+    public ResponseEntity<Usuario> getByCpf(@PathVariable("cpf") @CPF(message = "CPF INVALIDO.") String cpf){
 
         System.out.println("\n\niniciando busca...");
         Optional<Usuario> user = usuarioService.obterPorCpf(cpf);
