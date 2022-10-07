@@ -46,7 +46,7 @@ public class UsuarioController {
         }
 
         System.out.println("\n\nCPF inserido não foi encontrado.");
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/newUsuario")
@@ -69,6 +69,21 @@ public class UsuarioController {
         });
 
         return errors;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ConstraintViolationException.class)
+    public String handleValidationConstraintExcception(ConstraintViolationException ex){
+
+        Map<String, String> errors = new HashMap<>();
+
+        //System.out.println("Constraint Violations: (CPF INVÁliDO?) ==>" + ex.getConstraintViolations().toString().contains("CPF INVALIDO"));
+
+        if (ex.getConstraintViolations().toString().contains("CPF INVALIDO")){
+            return "CPF INSERIDO É INVÁLIDO";
+        }
+
+        return "Erro";
     }
 
 
