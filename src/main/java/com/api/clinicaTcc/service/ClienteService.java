@@ -2,6 +2,7 @@ package com.api.clinicaTcc.service;
 
 import com.api.clinicaTcc.model.Cliente;
 import com.api.clinicaTcc.repository.ClienteRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,10 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
-    public void cadastrar(Cliente cliente){
+    public Cliente cadastrar(Cliente cliente){
 
         clienteRepository.save(cliente);
+        return cliente;
     }
 
     public Optional<Cliente> atualizar(Long id, Cliente cliente){

@@ -40,8 +40,8 @@ public class ClienteController {
     @PostMapping("/cadastrar")
     public ResponseEntity<Cliente> cadastrar(@RequestBody Cliente cliente){
 
-        clienteService.cadastrar(cliente);
-        return ResponseEntity.ok(cliente);
+
+        return ResponseEntity.ok(clienteService.cadastrar(cliente));
     }
 
     @PutMapping("/{id}")
