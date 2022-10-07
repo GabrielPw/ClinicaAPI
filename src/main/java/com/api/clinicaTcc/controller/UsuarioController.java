@@ -35,7 +35,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/getByCpf/{cpf}")
-    public ResponseEntity<Usuario> getByCpf(@PathVariable("cpf") @CPF(message = "CPF INVALIDO.") String cpf){
+    public ResponseEntity getByCpf(@PathVariable("cpf") @CPF(message = "CPF INVALIDO.") String cpf){
 
         System.out.println("\n\niniciando busca...");
         Optional<Usuario> user = usuarioService.obterPorCpf(cpf);
@@ -46,7 +46,7 @@ public class UsuarioController {
         }
 
         System.out.println("\n\nCPF inserido não foi encontrado.");
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF inserido não foi encontrado");
     }
 
     @PostMapping("/newUsuario")
