@@ -32,7 +32,7 @@ public class Cliente {
     @Column(name = "telefone")
     private String telefone;
 
-    @JsonFormat(pattern = "dd/MM/yy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "dt_nascimento")
     private LocalDate dtNascimento;
 

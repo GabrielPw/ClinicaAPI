@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,7 @@ public class ClienteService {
     }
 
     public Cliente cadastrar(Cliente cliente){
+
 
         clienteRepository.save(cliente);
         return cliente;
