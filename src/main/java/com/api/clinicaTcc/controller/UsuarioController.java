@@ -67,15 +67,15 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> login(@RequestBody Usuario usuario){
 
         boolean existe = usuarioService.login(usuario);
 
         if (existe) {
-            return ResponseEntity.status(HttpStatus.OK).body("Usuário existe");
+            return ResponseEntity.ok(usuario);
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
+        return ResponseEntity.badRequest().build();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
