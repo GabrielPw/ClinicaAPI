@@ -56,6 +56,16 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.novoUsuario(usuario));
     }
 
+    @DeleteMapping("/{cpf}")
+    public ResponseEntity deleteByCpf(@PathVariable String cpf){
+
+        boolean existe = usuarioService.excluirPorCpf(cpf);
+        if (existe){
+            return ResponseEntity.status(HttpStatus.OK).body("Usuário excluido com sucesso!");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExcception(MethodArgumentNotValidException ex){

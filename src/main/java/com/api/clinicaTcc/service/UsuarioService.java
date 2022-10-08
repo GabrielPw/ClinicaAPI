@@ -45,5 +45,16 @@ public class UsuarioService {
         }
     }
 
+    public boolean excluirPorCpf(String cpf){
+
+        boolean existe = usuarioRepository.existsById(cpf);
+
+        if (existe){
+            usuarioRepository.delete(usuarioRepository.findById(cpf).get());
+        }
+
+        return existe;
+    }
+
 
 }
