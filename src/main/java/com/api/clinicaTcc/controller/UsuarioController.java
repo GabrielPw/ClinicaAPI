@@ -75,7 +75,7 @@ public class UsuarioController {
             return ResponseEntity.ok(usuario);
         }
 
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.notFound().build();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
