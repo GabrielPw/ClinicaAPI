@@ -66,6 +66,18 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
     }
 
+    @GetMapping("/login")
+    public ResponseEntity login(@RequestBody Usuario usuario){
+
+        boolean existe = usuarioService.login(usuario);
+
+        if (existe) {
+            return ResponseEntity.status(HttpStatus.OK).body("Usuário existe");
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExcception(MethodArgumentNotValidException ex){

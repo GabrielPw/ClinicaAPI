@@ -56,5 +56,22 @@ public class UsuarioService {
         return existe;
     }
 
+    public boolean login(Usuario usuario){
+
+        boolean existe = usuarioRepository.existsByCpfAndSenha(usuario.getCpf(), usuario.getSenha());
+
+        if (existe){
+            Usuario usuarioObtido = usuarioRepository.findById(usuario.getCpf()).get();
+
+            if (usuarioObtido.getSenha().matches(usuario.getSenha())){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return existe;
+    }
+
 
 }
