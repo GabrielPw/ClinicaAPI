@@ -61,7 +61,7 @@ public class UsuarioController {
 
         boolean existe = usuarioService.excluirPorCpf(cpf);
         if (existe){
-            return ResponseEntity.status(HttpStatus.OK).body("Usuário excluido com sucesso!");
+            return ResponseEntity.status(HttpStatus.OK).body("Usuário excluido com sucesso!!");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
     }
