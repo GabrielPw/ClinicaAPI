@@ -1,43 +1,21 @@
 package com.gabrielxavier.fasttooth;
 
-import android.app.StatusBarManager;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-import android.view.Window;
-
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.gabrielxavier.fasttooth.slides.carroselFotosAdapter;
 
-import java.util.ArrayList;
-
-public class InicioActivity extends AppCompatActivity {
-
-    ViewPager viewPager;
-    ArrayList<Integer> images = new ArrayList<>();
-    carroselFotosAdapter adapter;
-
+public class perfilActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inicio);
-        //barra de notificacoes preta
-        this.getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+        setContentView(R.layout.activity_perfil);
 
-        //resolvendo carrosel de fotos
-        viewPager = findViewById(R.id.viewPager_carroselFotos_inicio);
-        images.add(R.drawable.foto_carrosel1);
-        images.add(R.drawable.foto_carrosel1);
-        images.add(R.drawable.foto_carrosel1);
-
-        adapter = new carroselFotosAdapter(this, images);
-        viewPager.setAdapter(adapter);
-
-        MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigatio);
+        MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigatio_perfil);
 
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_baseline_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_baseline_dashboard));
@@ -64,27 +42,44 @@ public class InicioActivity extends AppCompatActivity {
             public void onShowItem(MeowBottomNavigation.Model item) {
                 String nome = "";
                 Fragment fragment = null;
-                switch (item.getId()) {
+                switch (item.getId()){
                     case 1:
-                        nome = "inicio";
+                        irParaInicio();
                         break;
                     case 2:
-                        nome = "servicos";
+                        irParaServicos();
                         break;
                     case 3:
-                        nome = "agenda";
+                        irParaAgenda();
                         break;
                     case 4:
                         nome = "perfil";
                         break;
-                    default:
-                        nome = "";
+                    default: nome = "";
                 }
-                Toast.makeText(InicioActivity.this, "pagina de: " + nome, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(inicioActivity.this, "pagina de: "+ nome, Toast.LENGTH_SHORT).show();
             }
 
         });
         //começando com a pagina home selecionada
-        bottomNavigation.show(1, true);
+        bottomNavigation.show(4, true);
+    }
+    public void irParaInicio(){
+        Intent intent = new Intent(perfilActivity.this, inicioActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+    }
+    public void irParaServicos(){
+        Intent intent = new Intent(perfilActivity.this, com.gabrielxavier.fasttooth.servicosActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+    }
+    public void irParaAgenda(){
+        Intent intent = new Intent(perfilActivity.this, com.gabrielxavier.fasttooth.agendaActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
     }
 }

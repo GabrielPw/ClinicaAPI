@@ -11,9 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.gabrielxavier.fasttooth.interfaces.APICall;
+import com.gabrielxavier.fasttooth.model.Servico;
 import com.gabrielxavier.fasttooth.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etLoginSenha;
 
     TextView tvErrorLoging;
+    List<Servico> listaServicos = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +72,33 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.code() == 200){
 
                         System.out.println("STATUS 200. OK");
-                        Intent intent = new Intent(LoginActivity.this, InicioActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, inicioActivity.class);
 
-                        startActivity(intent);
+                        // Carregar lista de serviços do usuário
+                        configurarRetrofitParaServico();
+
+                        Call<List<Servico>> servicos = apiCall.listarServico();
+
+                        servicos.enqueue(new Callback<List<Servico>>() {
+                            @Override
+                            public void onResponse(Call<List<Servico>> call, Response<List<Servico>> response) {
+
+                                System.out.println("\n\nObtendo Lista");
+                                listaServicos = response.body();
+
+                                System.out.println("Lista a ser add. [0] -->" + listaServicos.get(0));
+                                intent.putExtra("listaServices", (Serializable) listaServicos);
+                                System.out.println("\n\nLista adicionada para a próx. tela.");
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<Servico>> call, Throwable t) {
+
+                            }
+                        });
+
+
                     } else if (response.code() == 404){
                         System.out.println("Usuário não encontrado.");
                         tvErrorLoging.setText("*CPF ou senha inválidos.");
@@ -110,6 +140,22 @@ public class LoginActivity extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://clinica-api-tcc.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        // Instacia da interface;
+        apiCall = retrofit.create(APICall.class);
+
+    }
+
+    void configurarRetrofitParaServico(){
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://clinica-tcc-api.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

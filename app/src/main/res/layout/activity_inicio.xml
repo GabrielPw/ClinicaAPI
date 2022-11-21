@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e2e2e2"
-    tools:context=".InicioActivity">
+    tools:context=".inicioActivity">
 
 
     <ScrollView
@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="90dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigatio"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigatio_inicio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -627,7 +627,7 @@
     </ScrollView>
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:id="@+id/bottomNavigatio"
+        android:id="@+id/bottomNavigatio_inicio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

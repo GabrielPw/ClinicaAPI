@@ -16,7 +16,7 @@
         android:theme="@style/Theme.FastTooth"
         tools:targetApi="31">
         <activity
-            android:name=".InicioActivity"
+            android:name=".inicioActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
@@ -36,6 +36,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".perfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".agendaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".servicosActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
